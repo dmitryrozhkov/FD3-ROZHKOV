@@ -16,21 +16,21 @@
   
   <script>
    
-   //Задаем список товаров в интернет-магазине
-    var priceList=[ 
-      {id:'№', label:'Наименование',count:'Количество', price:'Цена', link: 'URL', code:1},     
+   //Задаем заголовок таблицы товаров интернет-магазина
+   var captionTable = {id:'№', label:'Наименование',count:'Количество', price:'Цена', link: 'URL', code:1};
+   
+   //Задаем список товаров в таблице товаров интернет-магазина
+    var priceList=[       
       {id:1, label:'яблоко',count:1500, price:20, link: 'https://goo.gl/rS6yq1', code:2}, 
       {id:2, label:'груша',count:1000, price:30, link: 'https://goo.gl/UH6Wn9', code:3}, 
       {id:3, label:'банан',count:500, price:25, link: 'https://goo.gl/TyvDN8', code:4} 
     ];
-
     
     //Рендерим компонет Ishop в DOM 
     ReactDOM.render(
       React.createElement(Ishop, {items:priceList}), 
       document.getElementById('container') 
     );
-
   </script>
 
 </body> 
