@@ -1,0 +1,37 @@
+<!DOCTYPE html> 
+<html> 
+<head> 
+  <meta charset="utf-8" />
+  <title>Фильтр_1</title>
+</head> 
+<body> 
+  <div id="container"></div> 
+      
+  <script src="https://unpkg.com/react@15/dist/react.js"></script> 
+  <script src="https://unpkg.com/react-dom@15/dist/react-dom.js"></script> 
+  <script src="filterBlock.js"></script>
+  <link rel="stylesheet" type="text/css" href="filterBlock.css" />
+  
+  
+  <script>     
+   
+   //Задаем массив-список товаров
+    var priceList=[ 
+            {label:'яблоко', code:1},
+            {label:'груша', code:2},
+            {label:'банан', code:3},
+            {label:'ананас', code:4},
+            {label:'киви', code:5},
+            {label:'виноград', code:6},
+            {label:'лимон', code:7}
+          ];     
+    
+    //Рендерим компонет filterBlock в DOM 
+    ReactDOM.render(
+      React.createElement(filterBlock, {items:priceList}), 
+      document.getElementById('container') 
+    );
+  </script>
+
+</body> 
+</html>

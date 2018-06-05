@@ -1,0 +1,18 @@
+
+
+ .filterBlock_box {
+  margin: 20px auto;
+  background: yellow;
+  height: 200px; 
+  width: 300px;
+  border-radius:5px
+ }
+
+ .filterBlock_items {
+  height: 100px; 
+  width: 200px;
+  background: greenyellow;
+  font-weight: bold;
+  overflow-y: scroll;
+  } 
+
