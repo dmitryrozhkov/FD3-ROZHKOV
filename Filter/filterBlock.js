@@ -27,7 +27,7 @@ var filterBlock = React.createClass({
 
   // Фильтруем товары по наличию букв в значении строки ключа label и отражаем в setState
   filteredList: function (EO) {    
-    this.setState({items: this.props.items.filter((item)=>{
+    this.setState({items: this.state.items.filter((item)=>{
       return item.label.toLowerCase().search(EO.target.value.toLowerCase())!== -1;
   })
 });
@@ -38,7 +38,7 @@ var filterBlock = React.createClass({
      //Если чекбокс чекнутый, то сортируем в алфавитном порядке с отражением в setState
       if (EO.target.checked) {
         this.setState({ 
-          items:this.props.items.sort(function(a,b){
+          items:this.state.items.sort((a,b)=>{
             if ( a.label<b.label )  return -1;
             if ( a.label>b.label)  return 1;
             return 0;
@@ -48,7 +48,7 @@ var filterBlock = React.createClass({
       }
       // Если чекбокс не чекнутый, то сортируем в порядке возрастания ключа code из массива товаров
       else  this.setState({
-          items:this.props.items.sort((a,b)=>{
+          items:this.state.items.sort((a,b)=>{
           if ( a.code<b.code )  return -1;
           if ( a.code>b.code)  return 1;
           return 0;
