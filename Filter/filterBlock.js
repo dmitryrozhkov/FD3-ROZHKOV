@@ -27,7 +27,7 @@ var filterBlock = React.createClass({
 
   // Фильтруем товары по наличию букв в значении строки ключа label и отражаем в setState
   filteredList: function (EO) {    
-    this.setState({items: this.state.items.filter((item)=>{
+    this.setState({items: this.props.items.filter((item)=>{
       return item.label.toLowerCase().search(EO.target.value.toLowerCase())!== -1;
   })
 });
