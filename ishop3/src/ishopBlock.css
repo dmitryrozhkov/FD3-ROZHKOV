@@ -1,0 +1,25 @@
+table {
+    margin: 20px auto;
+    background: yellow; 
+    width: 1000px;
+    border-radius:5px;
+   }
+  
+  tr:first-child {
+    background: greenyellow;
+    font-weight: bold
+    } 
+  
+  td {
+    text-align: center;
+    font-size: 20px;
+    height: 100px;
+    }
+    .itemCard {
+      margin: 20px auto;      
+      height: 280px;
+      width: 300px;
+      background: burlywood;
+      text-align: left;
+      padding: 10px 0 0 10px;
+  }
