@@ -13,8 +13,10 @@ import '../images/plum.png'
  class IshopBlock extends React.Component { 
     constructor (props) {
       super (props);
-      this.state ={isClicked: false,
-                   goods: null};        
+      this.state ={isClicked: null,
+                   goods: null,
+                   selectedItemCode: null,
+                  };        
     } 
 
     //Устанавливаем типы props
@@ -24,6 +26,7 @@ import '../images/plum.png'
           id: PropTypes.number.isRequired,
           label: PropTypes.string.isRequired,
           count: PropTypes.number.isRequired,
+          code: PropTypes.number.isRequired,
           price: PropTypes.number.isRequired,
           link: PropTypes.string,
         })
@@ -33,16 +36,15 @@ import '../images/plum.png'
     //Устанавливаем дефолтное значение props
     static defaultProps = {
       items:[        
-        {id:1, label:'слива', count:700, price:15, link: 'https://goo.gl/haJuRU', picture: '../images/plum.png'}      
+        {id:1, label:'слива', count:700, price:15, link: 'https://goo.gl/haJuRU', code:1, picture: '../images/plum.png'}      
       ]};    
     
-
-  handleRowClick = (value, row) => {
-  var result = (value==='on')?false:true; 
-  this.setState({ isClicked: result,
-                  goods: row })    
-}
-      render () {
+      itemSelected = (code, value, row) => {     
+        var result = (value==='on')?false:true;
+        this.setState({selectedItemCode:code, isClicked: result, goods: row})     
+      } 
+      
+  render () {
             
       return (  
         <div>       
@@ -56,7 +58,11 @@ import '../images/plum.png'
               <td>URL</td>                
             </tr>  
             {this.props.items.map ((item) =>
-              <ItemRow key = {item.code} item={item} cbShowCardItem={this.handleRowClick} />                                                  
+              <ItemRow key = {item.code} item={item}                                         
+                                         cbSelected={this.itemSelected}
+                                         code={item.code}
+                                         selectedItemCode={this.state.selectedItemCode}                                        
+              />                                                  
       )}   
           </tbody>
         </table> 
