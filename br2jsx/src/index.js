@@ -3,14 +3,9 @@ import ReactDOM from 'react-dom';
 
 import App from "./app";
 
+var sameText = "Скажи-ка,<br />дядя, <br /> ведь недаром..."
 
 ReactDOM.render(
-<App text={<h2>- Скажи-ка, дядя, ведь не даром <br/>
-Москва, спаленная пожаром,<br/>
-Французу отдана?<br/>
-Ведь были ж схватки боевые,<br/>
-Да, говорят, еще какие!<br/>
-Недаром помнит вся Россия<br/>
-Про день Бородина!</h2>} />,
+<App>{sameText}</App>,
 document.getElementById('container') 
 );
