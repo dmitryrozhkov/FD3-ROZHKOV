@@ -5,17 +5,29 @@ import './app.css';
 
 class App extends React.Component {
 
-  static propTypes = {
-    children: PropTypes.string.isRequired,
+   static propTypes = {
+    text: PropTypes.string.isRequired,
     };
+
+    state = {
+      text: this.props.text,
+    }
+
+    componentDidMount = () => {
+      var newArr = []
+      var arr = this.state.text.split(/\Dbr\s?\/?\D/).map((v, i) => {   
+      return  newArr.push(v, <br key={i} />)    
+      })
+       this.setState({text:newArr});             
+       };
     
       
       render () {       
-        console.log (this.props.children.split('<br />').join('\n'))
+       
       return (        
-        <div className="text">
-            {this.props.children.split('<br />').join('\n')}
-        </div> 
+        <div className="text">                  
+            {this.state.text}
+        </div>
       )
     }
       }    
