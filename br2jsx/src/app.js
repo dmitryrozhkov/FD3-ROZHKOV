@@ -25,7 +25,7 @@ class App extends React.Component {
     
       
       render () {       
-       
+      
       return (        
         <div className="text">                  
             {this.state.text}
