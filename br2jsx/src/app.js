@@ -15,8 +15,10 @@ class App extends React.Component {
 
     componentDidMount = () => {
       var newArr = []
-      var arr = this.state.text.split(/<br\s*\/?>/).forEach((v, i) => {   
-      return  newArr.push(v, <br key={i} />)    
+      this.state.text.split(/<br\s*\/?>/).forEach((v, i) => {   
+        if (i>0) {newArr.push(<br key={i} />)
+        newArr.push(v)}                    
+        else newArr.push(v)    
       })
        this.setState({text:newArr});             
        };
