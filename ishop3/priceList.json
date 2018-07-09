@@ -1,5 +1,0 @@
-[          
-    {"id":1, "label":"яблоко", "count":1500, "price":20, "link": "https://goo.gl/rS6yq1", "code":2, "picture":"../images/apple.png"}, 
-    {"id":2, "label":"груша", "count":1000, "price":30, "link": "https://goo.gl/UH6Wn9", "code":3, "picture":"../images/pear.png"}, 
-    {"id":3, "label":"банан", "count":500, "price":25, "link": "https://goo.gl/TyvDN8", "code":4, "picture":"../images/banan.png"} 
-]
