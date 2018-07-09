@@ -1,0 +1,46 @@
+table {
+    margin: 20px auto;
+    background:yellow; 
+    /*width: 1000px;*/
+    border-radius:5px;
+   } 
+ 
+  
+  tr:first-child {
+    background: greenyellow;
+    font-weight: bold
+    } 
+  
+  td {
+    text-align: center;
+    font-size: 20px;
+    height: 70px;
+    width: 220px;
+    }
+
+  button {
+    margin-left: 5px;
+    height: 30px;
+    width: 100px;
+    background:wheat;    
+    text-align: center;
+    font: 12px sans-serif;
+    
+  }   
+
+  .newProduct {
+    display: block;    
+    margin: 10px auto;      
+    height: 40px;
+    width: 150px;
+    background: wheat;    
+    text-align: center;
+    padding: 5px;
+    font: 1.2em sans-serif;
+    font: bold;
+}
+
+.on{
+  color:black;
+  background-color: #ccc;
+}

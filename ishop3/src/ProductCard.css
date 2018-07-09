@@ -1,0 +1,9 @@
+.productCard {
+    margin: 10px auto;      
+    height: 330px;
+    width: 350px;
+    background: burlywood;
+    border: 3px solid blue;
+    text-align: left;
+    padding: 0 0 0 10px;
+}
