@@ -73,15 +73,16 @@ class ProductCard extends React.Component {
      changeCountProduct =(EO) => {       
         var countEdited = Number(EO.target.value)
         if (countEdited>0) {
-          this.setState({countIsEmpty: false,                        
-                         count:countEdited,                         
+          this.setState({
+                        countIsEmpty: false,                        
+                        count:countEdited,                         
                         })
         } 
         else {
         this.setState({                           
-                         countIsEmpty: true,       
-                         saveIsEdit:false,
-                          })
+                      countIsEmpty: true,       
+                      saveIsEdit:false,
+                      })
         }
     }   
 
@@ -176,13 +177,13 @@ class ProductCard extends React.Component {
           <div className = 'productCard'>
             <h3><div>Картинка:</div><img src = {this.props.cardProductId[0].picture}/></h3>                                   
             <h3>Наименование: {" " + this.props.cardProductId[0].label}</h3>
-            <h3>Цена: <input type="text" /*defaultValue={this.props.cardProductId[0].price}*/ onChange={this.changePriceProduct} /*style={{borderColor:priceColor}}*/ />
+            <h3>Цена: <input type="text" defaultValue={this.props.cardProductId[0].price} onChange={this.changePriceProduct} /*style={{borderColor:priceColor}}*/ />
             {(this.state.priceIsEmpty&&this.state.saveIsEdit)?<div style={{color:'red', fontSize:'16px'}}>*введите положительное число</div>:null}
             </h3>
-            <h3>Количество:<input type="text" /*defaultValue={this.props.cardProductId[0].count}*/ onChange={this.changeCountProduct} />
+            <h3>Количество:<input type="text" defaultValue={this.props.cardProductId[0].count} onChange={this.changeCountProduct} />
             {(this.state.countIsEmpty&&this.state.saveIsEdit)?<div style={{color:'red', fontSize:'16px'}}>*введите положительное число</div>:null}
             </h3>
-            <button onClick={this.saveEdit} /*disabled={(this.state.priceIsEmpty)&&(this.state.saveIsEdit)}*/>сохранить</button>                                
+            <button onClick={this.saveEdit}>сохранить</button>                                
             <button onClick={this.cancelEdit}>отмена</button>                                                                      
           </div>
         )

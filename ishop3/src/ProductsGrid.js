@@ -4,11 +4,6 @@ import PropTypes from 'prop-types';
 import ProductCard from "./ProductCard";
 
 import './ProductsGrid.css';
-import '../images/apple.png'
-import '../images/pear.png'
-import '../images/banan.png'
-import '../images/plum.png'
-
  
  class ProductsGrid extends React.Component { 
     constructor (props) {
@@ -46,6 +41,7 @@ import '../images/plum.png'
        };
 
        productClicked = (EO) => {
+         if ((this.state.cardWorkMode!==2)&&(this.state.cardWorkMode!==3)) {
         var filteredList = this.state.products.filter((product)=>{
           if (product.id==EO.currentTarget.getAttribute("data-product"))
         return product
@@ -56,6 +52,7 @@ import '../images/plum.png'
                       cardProductId: filteredList,
                       cardWorkMode:1,
                       })
+                    }
        }
       
        productDeleteClicked = (EO) =>{        
@@ -138,7 +135,7 @@ import '../images/plum.png'
               <td>Кнопки</td>                 
             </tr>  
             { this.state.products.map ((product) =>
-            <tr data-product = {product.id} key = {product.code} className={(this.state.selectedProductId==product.id)?"on":null} onClick = {this.productClicked}>                                             
+            <tr data-product = {product.id} key = {product.code} className={((this.state.selectedProductId==product.id&&this.state.cardWorkMode==1)||(this.state.productEditIsClicked&&this.state.cardProductId[0].id==product.id))?"on":null} onClick = {this.productClicked} >                                             
               <td> {product.label}</td>
               <td> {product.price} </td>                
               <td> {product.count }</td>
@@ -157,15 +154,15 @@ import '../images/plum.png'
                        cardProductId = {this.state.cardProductId}                       
                        cbSaveEdit={this.productSaveEdit}
                        cbCancelEdit={this.productCancelEdit}
-                       cbSaveNewProduct= {this.saveNewProduct}                       
+                       cbSaveNewProduct= {this.saveNewProduct}
+                       productEditIsClicked = {this.state.productEditIsClicked}                      
         />  
         <button  className = "newProduct" onClick={this.productAddClicked} disabled={(this.state.cardWorkMode==2)||(this.state.cardWorkMode==3)}>новый</button>   
         </div>                                                                                      
                                                                                                                                            
         ); 
                 
-      } 
-             
+      }             
     }
   
     export default  ProductsGrid;
