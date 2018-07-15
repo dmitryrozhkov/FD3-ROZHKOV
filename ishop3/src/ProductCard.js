@@ -1,89 +1,75 @@
 import React from 'react';
 
+import {productsEvents} from './events';
+
 import './ProductCard.css';
 
-class ProductCard extends React.Component {  
+class ProductCard extends React.Component { 
     constructor (props) {      
       super (props);      
       this.state ={ 
         id: 555,
         picture:"виноград",
-        label: "виноград",             
-        price: 0,
+        label: "виноград",                  
+        price: null,        
         count: 345,
         link: 'https://goo.gl/haJuRU',
         code:5,
-        priceIsEmpty: true,
-        countIsEmpty: true,       
+        priceIsEmpty: false,
+        countIsEmpty: false,       
         saveIsEdit:false, 
         priceNewProductIsEmpty: true,
         labelNewProductIsEmpty:true,
         countNewProductIsEmpty: true,
-        saveNewProductIsEdit: false,        
+        saveNewProductIsEdit: false,
+        priceIsChanged: false, 
+        countIsChanged: false,        
        }  
       }
-      
-      saveEdit = (EO) => {
-      if (this.state.priceIsEmpty||this.state.countIsEmpty)  {     
-      this.setState({       
-                    saveIsEdit:true,                  
-                    })
-      }
-
-      else {     
-      this.props.cardProductId[0].price=this.state.price    
-      this.props.cardProductId[0].count=this.state.count        
-      this.props.cbSaveEdit(this.props.cardProductId)     
-      this.setState({
-                    priceIsEmpty: true,
-                    countIsEmpty:true,
-                    saveIsEdit:false,                     
-                    })     
-      }
-    }
     
-    cancelEdit = (EO) => {      
-      this.props.cbCancelEdit() 
+    saveEdit = (EO) => {    
+        let re = /^[1-9]+?[0-9]*$/        
+        let priceEdited = re.test (this.newPriceRef.value)
+        let countEdited = re.test (this.newCountRef.value)     
+        if (priceEdited&&countEdited) {
+      this.setState({
+        price:this.newPriceRef.value,
+        count: this.newCountRef.value, 
+        saveIsEdit:false,       
+        priceIsEmpty: false,
+        countIsEmpty: false,                      
+        })
+        this.props.cardProductId[0].price=this.newPriceRef.value   
+        this.props.cardProductId[0].count=this.newCountRef.value        
+        productsEvents.emit('ESaveEditClicked',this.props.cardProductId);
+      }    
+      else if (!priceEdited)      
+               this.setState({       
+                            priceIsEmpty: true,
+                            countIsEmpty: false,     
+                            saveIsEdit:true,                          
+                            })      
+      else if (!countEdited)      
+               this.setState({      
+                            priceIsEmpty: false,
+                            countIsEmpty: true,     
+                            saveIsEdit:true,                          
+                            })  
+      }  
+      
+   
+    
+    cancelEdit = (EO) => {  
+      productsEvents.emit('ECancelClicked');
       this.setState({        
                     saveIsEdit:false,
                     saveNewProductIsEdit:false,
                     priceIsEmpty: true,
-                    countIsEmpty: true,
+                    countIsEmpty: true,                   
                     priceNewProductIsEmpty: true,
                     labelNewProductIsEmpty:true,
-                    countNewProductIsEmpty: true,         
+                    countNewProductIsEmpty: true,                          
                    })     
-    }
-
-    changePriceProduct =(EO) => {   
-          var priceEdited = Number(EO.target.value)         
-            if (priceEdited>0) {
-            this.setState({priceIsEmpty: false,                          
-                           price:priceEdited,                          
-                          })
-          } 
-          else {
-          this.setState({                           
-                        priceIsEmpty: true,         
-                        saveIsEdit:false,
-                        })
-          }   
-     }
-
-     changeCountProduct =(EO) => {       
-        var countEdited = Number(EO.target.value)
-        if (countEdited>0) {
-          this.setState({
-                        countIsEmpty: false,                        
-                        count:countEdited,                         
-                        })
-        } 
-        else {
-        this.setState({                           
-                      countIsEmpty: true,       
-                      saveIsEdit:false,
-                      })
-        }
     }   
 
     saveNewProduct = (EO) => {
@@ -101,8 +87,8 @@ class ProductCard extends React.Component {
                         link: this.state.link,
                         picture:this.state.picture,
                         code:this.state.code++,
-                       }          
-        this.props.cbSaveNewProduct(newProduct)
+                       }    
+        productsEvents.emit('ESaveNewProductClicked',newProduct);
         this.setState({
                       priceNewProductIsEmpty: true,
                       labelNewProductIsEmpty: true,
@@ -159,9 +145,37 @@ class ProductCard extends React.Component {
                           saveNewProductIsEdit:false,
                          })
           }      
-    }    
+    } 
+    
+  newPriceRef = null;
+
+  setNewPriceRef = (ref) => {
+    this.newPriceRef=ref;
+    if ( this.newPriceRef ) {
+    let newPrice=this.newPriceRef.value;     
+      this.setState({price:newPrice}); 
+      console.log (newPrice)
+     }    
+    }  
+  
+
+  newCountRef = null;
+
+  setNewCountRef = (ref) => {
+    this.newCountRef=ref; 
+    if ( this.newCountRef ) {
+    let newCount=this.newCountRef.value;
+      this.setState({count:newCount});
+    }   
+  };
 
     render () {
+      let priceColor = this.state.priceIsEmpty&&this.state.saveIsEdit?"red":"green";
+      let countColor = this.state.countIsEmpty&&this.state.saveIsEdit?"red":"green";
+
+      console.log(this.state.price)
+      console.log(this.state.count)
+      console.log ('render')
         if (this.props.cardWorkMode==1) {         
       return (        
         <div className = 'productCard'>
@@ -177,11 +191,11 @@ class ProductCard extends React.Component {
           <div className = 'productCard'>
             <h3><div>Картинка:</div><img src = {this.props.cardProductId[0].picture}/></h3>                                   
             <h3>Наименование: {" " + this.props.cardProductId[0].label}</h3>
-            <h3>Цена: <input type="text" defaultValue={this.props.cardProductId[0].price} onChange={this.changePriceProduct} /*style={{borderColor:priceColor}}*/ />
-            {(this.state.priceIsEmpty&&this.state.saveIsEdit)?<div style={{color:'red', fontSize:'16px'}}>*введите положительное число</div>:null}
+            <h3>Цена: <input type="text" defaultValue={this.props.cardProductId[0].price} ref={this.setNewPriceRef} style={{borderColor:priceColor}} />
+            {(this.state.priceIsEmpty&&this.state.saveIsEdit)?<div style={{color:'red', fontSize:'16px'}}>*введите целое положительное число</div>:null}
             </h3>
-            <h3>Количество:<input type="text" defaultValue={this.props.cardProductId[0].count} onChange={this.changeCountProduct} />
-            {(this.state.countIsEmpty&&this.state.saveIsEdit)?<div style={{color:'red', fontSize:'16px'}}>*введите положительное число</div>:null}
+            <h3>Количество:<input type="text" defaultValue={this.props.cardProductId[0].count} ref={this.setNewCountRef} style={{borderColor:countColor}}/>
+            {(this.state.countIsEmpty&&this.state.saveIsEdit)?<div style={{color:'red', fontSize:'16px'}}>*введите целое положительное число</div>:null}
             </h3>
             <button onClick={this.saveEdit}>сохранить</button>                                
             <button onClick={this.cancelEdit}>отмена</button>                                                                      
@@ -206,8 +220,7 @@ class ProductCard extends React.Component {
           </div>
         )
       }
-      else return null
-    }
+      else return null    }
       }    
 
     export default ProductCard ;

@@ -2,10 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import ProductCard from "./ProductCard";
+import {productsEvents} from './events';
 
 import './ProductsGrid.css';
- 
- class ProductsGrid extends React.Component { 
+
+ class ProductsGrid extends React.Component {  
     constructor (props) {
       super (props);       
     } 
@@ -37,8 +38,21 @@ import './ProductsGrid.css';
         cardProductId:null,
         selectedProductId:null,
         deletedProductId:null,
+        productIsClicked:false,
         productEditIsClicked:false,                                  
        };
+
+       componentDidMount = () => {
+        productsEvents.addListener('ECancelClicked',this.productCancelEdit);
+        productsEvents.addListener('ESaveEditClicked',this.productSaveEdit);
+        productsEvents.addListener('ESaveNewProductClicked',this.saveNewProduct);
+      };
+    
+      componentWillUnmount = () => {
+        productsEvents.removeListener('ECancelClicked',this.productCancelEdit);
+        productsEvents.removeListener('ESaveEditClicked',this.productSaveEdit);
+        productsEvents.removeListener('ESaveNewProductClicked',this.saveNewProduct);
+      };
 
        productClicked = (EO) => {
          if ((this.state.cardWorkMode!==2)&&(this.state.cardWorkMode!==3)) {
@@ -51,6 +65,8 @@ import './ProductsGrid.css';
                       selectedProductId:EO.currentTarget.getAttribute("data-product"),
                       cardProductId: filteredList,
                       cardWorkMode:1,
+                      productIsClicked:true,
+                      productEditIsClicked:false,
                       })
                     }
        }
@@ -82,6 +98,7 @@ import './ProductsGrid.css';
                       cardProductId: editedFilteredList, 
                       cardWorkMode:2,
                       productEditIsClicked:true,
+                      productIsClicked:false,
                       })    
       }
 
@@ -135,27 +152,22 @@ import './ProductsGrid.css';
               <td>Кнопки</td>                 
             </tr>  
             { this.state.products.map ((product) =>
-            <tr data-product = {product.id} key = {product.code} className={((this.state.selectedProductId==product.id&&this.state.cardWorkMode==1)||(this.state.productEditIsClicked&&this.state.cardProductId[0].id==product.id))?"on":null} onClick = {this.productClicked} >                                             
+            <tr data-product = {product.id} key = {product.code} className={((this.state.productIsClicked&&this.state.selectedProductId==product.id/*&&this.state.cardWorkMode==1*/)||(this.state.productEditIsClicked&&this.state.cardProductId[0].id==product.id))?"on":null} onClick = {this.productClicked} >                                             
               <td> {product.label}</td>
               <td> {product.price} </td>                
               <td> {product.count }</td>
               <td> {product.link} </td>
               <td>
-                  <button  data-product = {product.id} onClick={this.productDeleteClicked}>удалить</button> 
+                  <button  data-product = {product.id} onClick={this.productDeleteClicked} disabled={(this.state.cardWorkMode==2)||(this.state.cardWorkMode==3)}>удалить</button> 
             <button  data-product = {product.id} onClick={this.productEditClicked} disabled={(this.state.cardWorkMode==2)||(this.state.cardWorkMode==3)}>редактировать</button>                    
               </td>                                             
-                                              
             </tr>                              
       )}   
           </tbody>
         </table>
          <ProductCard  
                        cardWorkMode = {this.state.cardWorkMode}
-                       cardProductId = {this.state.cardProductId}                       
-                       cbSaveEdit={this.productSaveEdit}
-                       cbCancelEdit={this.productCancelEdit}
-                       cbSaveNewProduct= {this.saveNewProduct}
-                       productEditIsClicked = {this.state.productEditIsClicked}                      
+                       cardProductId = {this.state.cardProductId}                                        
         />  
         <button  className = "newProduct" onClick={this.productAddClicked} disabled={(this.state.cardWorkMode==2)||(this.state.cardWorkMode==3)}>новый</button>   
         </div>                                                                                      
