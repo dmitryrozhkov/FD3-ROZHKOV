@@ -2,7 +2,6 @@
 import PropTypes from 'prop-types';
 
 import './MobileClient.css';
-import {clientsEvents} from './events';
 
 class MobileClient extends React.PureComponent {
 
@@ -18,18 +17,18 @@ class MobileClient extends React.PureComponent {
     info: this.props.info,
   };
 
-  componentWillReceiveProps = (newProps) => {   
+  componentWillReceiveProps = (newProps) => {    
     this.setState({info:newProps.info});
   };
 
   render() {
 
     console.log("MobileClient id="+this.state.info.id+" render");
-    
+    let countColor = this.props.color?"red":"black";    
     return (
       <div className='MobileClient'>
-        <span className='MobileClientBalance'>{this.state.info.balance}</span>
-        <span className='MobileClientFIO'>{this.state.info.fio}</span>        
+        <span className='MobileClientBalance' style={{color:countColor}}>{this.state.info.balance}</span>
+        <span className='MobileClientFIO' style={{color:countColor}}>{this.state.info.fio}</span>        
       </div>
     );
 
@@ -38,3 +37,5 @@ class MobileClient extends React.PureComponent {
 }
 
 export default MobileClient;
+
+ 

@@ -24,20 +24,24 @@ class MobileCompany extends React.PureComponent {
     name: this.props.name,
     clients: this.props.clients,
     cardWorkMode:0,
+    color:false,
   };
 
   componentDidMount = () => {
     clientsEvents.addListener('EAddFioClicked',this.addClientFio);
-    clientsEvents.addListener('EDeleteFioClicked',this.deleteClientFio);    
+    clientsEvents.addListener('EDeleteFioClicked',this.deleteClientFio);
+    clientsEvents.addListener('EChangeFioClicked',this.changeClientFio);
+    clientsEvents.addListener('EChangeBalanceClicked',this.changeClientBalance);
   };
 
   componentWillUnmount = () => {
     clientsEvents.removeListener('EAddFioClicked', this.addClientFio);
-    clientsEvents.removeListener('EDeleteFioClicked',this.deleteClientFio);    
+    clientsEvents.removeListener('EDeleteFioClicked',this.deleteClientFio);
+    clientsEvents.removeListener('EChangeFioClicked',this.changeClientFio);
+    clientsEvents.removeListener('EChangeBalanceClicked',this.changeClientBalance);
   };
 
-  addClientFio = (newId, newFio, newBalance) => {
-    console.log (newFio)
+  addClientFio = (newId, newFio, newBalance) => {    
     let newListClients = [...this.state.clients]
     newListClients = [...this.state.clients, {id:newId, fio:newFio, balance:newBalance}]
     this.setState({
@@ -46,8 +50,7 @@ class MobileCompany extends React.PureComponent {
                   })
   }
 
-  deleteClientFio = (deleteId) => {
-    console.log (deleteId)
+  deleteClientFio = (deleteId) => {    
     var strDelete=confirm("Вы действительно хотите удалить клиента ID: "+deleteId+ "?")
         if (strDelete) {
     let listClients = [...this.state.clients]    
@@ -55,7 +58,6 @@ class MobileCompany extends React.PureComponent {
       if (deleteId == client.id)   
         return null      
       else return client
-
     })
     this.setState({
                   clients:listClients,
@@ -64,16 +66,60 @@ class MobileCompany extends React.PureComponent {
       }
   }
 
+  changeClientFio = (clientId, newFio) => {    
+    let listClients = [...this.state.clients]
+    listClients.forEach( (c,i) => {
+      if ( c.id==clientId&& c.fio!=newFio ) {       
+        let changeClientFio={...c}; // копия хэша изменившегося клиента
+        changeClientFio.fio=newFio;        
+        listClients[i]=changeClientFio;       
+        }
+      })    
+    this.setState({
+      clients:listClients,
+      cardWorkMode:0,
+      })
+  }
+
+  changeClientBalance = (clientId, newBalance) => {   
+    let listClients = [...this.state.clients]
+    listClients.forEach( (c,i) => {
+      if ( c.id==clientId&& c.balance!=newBalance ) {        
+       
+        let changeClientBalance={...c}; // копия хэша изменившегося клиента
+        changeClientBalance.balance=newBalance;        
+        listClients[i]=changeClientBalance;        
+      }
+    })   
+    this.setState({
+      clients:listClients,
+      cardWorkMode:0,
+      })
+  }
+
+  filterBlockClients = () => {    
+    let listClients = [...this.state.clients]
+    listClients = listClients.filter ((client)=> {
+      if (client.balance<0)   
+        return client      
+      else return null
+
+    })
+    this.setState({                     
+                clients:listClients, 
+                color:true,                  
+                  })                     
+  }
+
   setName1 = () => {
     this.setState({name:'МТС'});
   };
 
   setName2 = () => {
     this.setState({name:'Velcom'});
-  };
-  
+  }; 
 
-  addFio = () => {    
+  addFio = () => {   
     this.setState({                     
                   cardWorkMode:1,                     
                   })                      
@@ -84,13 +130,25 @@ class MobileCompany extends React.PureComponent {
                   cardWorkMode:2,                     
                   })                     
   }
-  
+
+  changeFio = () => {  
+    this.setState({                     
+                  cardWorkMode:3,                     
+                  })                     
+  }
+
+  changeBalance = () => {  
+    this.setState({                     
+                  cardWorkMode:4,                     
+                  })                     
+  }
+    
   render() {
 
     console.log("MobileCompany render");
 
     var clientsCode=this.state.clients.map( client =>
-      <MobileClient key={client.id} info={client}  />
+      <MobileClient key={client.id} info={client} color={this.state.color} />
     );
 
     return (
@@ -103,11 +161,13 @@ class MobileCompany extends React.PureComponent {
           {clientsCode}
         </div>       
         <input type="button" value="Добавить нового клиента" onClick={this.addFio} /><br/><br/>
-        <input type="button" value="Удалить клиента" onClick={this.deleteFio} />
+        <input type="button" value="Удалить клиента" onClick={this.deleteFio} /><br/><br/>
+        <input type="button" value="Изменить фамилию" onClick={this.changeFio} /><br/><br/>
+        <input type="button" value="Изменить баланс" onClick={this.changeBalance} /><br/><br/>
+        <input type="button" value="Фильтр заблокированных клиентов" onClick={this.filterBlockClients} /><br/><br/>
         </div>
         <ClientsCard  
-                       cardWorkMode = {this.state.cardWorkMode}
-                                          
+                       cardWorkMode = {this.state.cardWorkMode}                                          
         />    
       </div>
     );
