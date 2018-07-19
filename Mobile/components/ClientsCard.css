@@ -1,0 +1,9 @@
+.clientsCard {
+    margin: 10px auto;      
+    height: 200px;
+    width: 200px;
+    background: rgb(218, 195, 166);
+    border: 1px solid blue;
+    text-align: left;
+    padding: 10px 0 0 10px;
+}

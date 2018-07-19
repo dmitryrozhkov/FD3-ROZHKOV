@@ -1,0 +1,29 @@
+﻿
+.Wrapper 
+{
+  text-align: center;
+  padding: 10px 0;
+  background:darkgrey;
+ 
+}
+
+.MobileCompany
+{  
+  display: inline-block;
+  border: double gray 3px;
+  width: 400px;
+  height: 300px;
+  padding: 3px 7px;
+  background-color: lightyellow;
+}
+
+.MobileCompanyName
+{  
+  font-weight: bold;
+}
+
+.MobileCompanyClients
+{ 
+  text-align: left;  
+  padding-top: 5px;
+}
