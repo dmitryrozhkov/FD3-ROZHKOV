@@ -100,15 +100,36 @@ class MobileCompany extends React.PureComponent {
   filterBlockClients = () => {    
     let listClients = [...this.state.clients]
     listClients = listClients.filter ((client)=> {
-      if (client.balance<0)   
+      if (client.balance<=0)   
         return client      
       else return null
-
     })
     this.setState({                     
                 clients:listClients, 
-                color:true,                  
+                //color:true,                  
                   })                     
+  }
+
+  filterActiveClients = () => {   
+    let listClients = [...this.state.clients]
+    listClients=listClients.filter ((client)=> {
+      if (client.balance>0)   
+        return client     
+      else return null
+    })
+    this.setState({                     
+                clients:listClients,
+                //color:false,                            
+                  })                     
+  }
+
+  filterClients = () => {    
+    let listClients = this.props.clients    
+    this.setState({                     
+      clients:listClients,
+      cardWorkMode:0, 
+      //color:false,                     
+        })
   }
 
   setName1 = () => {
@@ -164,7 +185,9 @@ class MobileCompany extends React.PureComponent {
         <input type="button" value="Удалить клиента" onClick={this.deleteFio} /><br/><br/>
         <input type="button" value="Изменить фамилию" onClick={this.changeFio} /><br/><br/>
         <input type="button" value="Изменить баланс" onClick={this.changeBalance} /><br/><br/>
-        <input type="button" value="Фильтр заблокированных клиентов" onClick={this.filterBlockClients} /><br/><br/>
+        <input type="button" value="Заблокированные клиенты" onClick={this.filterBlockClients} /><br/><br/>
+        <input type="button" value="Активные клиенты" onClick={this.filterActiveClients} /><br/><br/>
+        <input type="button" value="Все клиенты" onClick={this.filterClients} /><br/><br/>
         </div>
         <ClientsCard  
                        cardWorkMode = {this.state.cardWorkMode}                                          
