@@ -23,12 +23,12 @@ class MobileClient extends React.PureComponent {
 
   render() {
 
-    console.log("MobileClient id="+this.state.info.id+" render");
-    let countColor = this.props.color?"red":"black";    
+    console.log("MobileClient id="+this.state.info.id+" render");    
+    
     return (
       <div className='MobileClient'>
-        <span className='MobileClientBalance' style={{color:countColor}}>{this.state.info.balance}</span>
-        <span className='MobileClientFIO' style={{color:countColor}}>{this.state.info.fio}</span>        
+        <span className='MobileClientBalance' >{this.state.info.balance}</span>
+        <span className='MobileClientFIO' >{this.state.info.fio}</span>        
       </div>
     );
 

@@ -23,8 +23,8 @@ class MobileCompany extends React.PureComponent {
   state = {
     name: this.props.name,
     clients: this.props.clients,
-    cardWorkMode:0,
-    color:false,
+    cardWorkMode:0,    
+    allClients:0,
   };
 
   componentDidMount = () => {
@@ -97,40 +97,23 @@ class MobileCompany extends React.PureComponent {
       })
   }
 
-  filterBlockClients = () => {    
-    let listClients = [...this.state.clients]
-    listClients = listClients.filter ((client)=> {
-      if (client.balance<=0)   
-        return client      
-      else return null
-    })
-    this.setState({                     
-                clients:listClients, 
-                //color:true,                  
+  filterBlockClients = () => {   
+    this.setState({           
+                allClients:1                  
                   })                     
   }
 
   filterActiveClients = () => {   
-    let listClients = [...this.state.clients]
-    listClients=listClients.filter ((client)=> {
-      if (client.balance>0)   
-        return client     
-      else return null
-    })
-    this.setState({                     
-                clients:listClients,
-                //color:false,                            
+    this.setState({    
+                  allClients:2                         
                   })                     
-  }
+    }
 
-  filterClients = () => {    
-    let listClients = this.props.clients    
-    this.setState({                     
-      clients:listClients,
-      cardWorkMode:0, 
-      //color:false,                     
-        })
-  }
+  filterClients = () => {      
+    this.setState({      
+                 allClients:0                     
+                  })
+    }
 
   setName1 = () => {
     this.setState({name:'МТС'});
@@ -168,9 +151,25 @@ class MobileCompany extends React.PureComponent {
 
     console.log("MobileCompany render");
 
-    var clientsCode=this.state.clients.map( client =>
-      <MobileClient key={client.id} info={client} color={this.state.color} />
-    );
+    if (this.state.allClients==0) {
+      var clientsCode=this.state.clients.map( (client) =>       
+        <MobileClient key={client.id} info={client} color={this.state.color} />
+      );  
+    }
+
+    if (this.state.allClients==1) {
+    var clientsCode=this.state.clients.map( (client) =>     
+      client.balance<=0?
+      <MobileClient key={client.id} info={client} color={this.state.color} />:null
+    );  
+  }
+
+    if (this.state.allClients==2) {
+      var clientsCode=this.state.clients.map( (client) =>     
+        client.balance>0?
+        <MobileClient key={client.id} info={client} color={this.state.color} />:null
+    );  
+  }
 
     return (
       <div className="Wrapper">
