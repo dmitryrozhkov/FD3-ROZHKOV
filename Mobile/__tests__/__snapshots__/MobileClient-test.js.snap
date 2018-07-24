@@ -1,0 +1,69 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`работа MobileClient 1`] = `
+<div
+  className="MobileClient"
+>
+  <span
+    className="MobileClientBalance"
+  >
+    200
+  </span>
+  <span
+    className="MobileClientFIO"
+  >
+    Иванов И.И.
+  </span>
+</div>
+`;
+
+exports[`работа MobileClient 2`] = `
+<div
+  className="MobileClient"
+>
+  <span
+    className="MobileClientBalance"
+  >
+    -250
+  </span>
+  <span
+    className="MobileClientFIO"
+  >
+    Сидоров С.С.
+  </span>
+</div>
+`;
+
+exports[`работа MobileClient 3`] = `
+<div
+  className="MobileClient"
+>
+  <span
+    className="MobileClientBalance"
+  >
+    -180
+  </span>
+  <span
+    className="MobileClientFIO"
+  >
+    Петров П.П.
+  </span>
+</div>
+`;
+
+exports[`работа MobileClient 4`] = `
+<div
+  className="MobileClient"
+>
+  <span
+    className="MobileClientBalance"
+  >
+    220
+  </span>
+  <span
+    className="MobileClientFIO"
+  >
+    Григорьев Г.Г.
+  </span>
+</div>
+`;

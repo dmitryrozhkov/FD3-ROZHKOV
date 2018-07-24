@@ -1,0 +1,121 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`работа ClientsCard 1`] = `
+<div
+  className="clientsCard"
+>
+  <label>
+    ID:
+  </label>
+  <br />
+  <input
+    type="text"
+  />
+  <br />
+  <br />
+  <label>
+    Фамилия:
+  </label>
+  <br />
+  <input
+    type="text"
+  />
+  <br />
+  <br />
+  <label>
+    Баланс:
+  </label>
+  <br />
+  <input
+    type="text"
+  />
+  <br />
+  <br />
+  <button
+    onClick={[Function]}
+  >
+    Сохранить
+  </button>
+</div>
+`;
+
+exports[`работа ClientsCard 2`] = `
+<div
+  className="clientsCard"
+>
+  <label>
+    ID:
+  </label>
+  <br />
+  <input
+    type="text"
+  />
+  <br />
+  <br />
+  <button
+    onClick={[Function]}
+  >
+    Удалить
+  </button>
+</div>
+`;
+
+exports[`работа ClientsCard 3`] = `
+<div
+  className="clientsCard"
+>
+  <label>
+    ID:
+  </label>
+  <br />
+  <input
+    type="text"
+  />
+  <br />
+  <br />
+  <label>
+    Новая фамилия:
+  </label>
+  <br />
+  <input
+    type="text"
+  />
+  <br />
+  <br />
+  <button
+    onClick={[Function]}
+  >
+    Изменить
+  </button>
+</div>
+`;
+
+exports[`работа ClientsCard 4`] = `
+<div
+  className="clientsCard"
+>
+  <label>
+    ID:
+  </label>
+  <br />
+  <input
+    type="text"
+  />
+  <br />
+  <br />
+  <label>
+    Новый баланс:
+  </label>
+  <br />
+  <input
+    type="text"
+  />
+  <br />
+  <br />
+  <button
+    onClick={[Function]}
+  >
+    Изменить
+  </button>
+</div>
+`;

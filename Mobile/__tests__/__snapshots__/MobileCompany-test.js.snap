@@ -1,0 +1,138 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`работа MobileCompany 1`] = `
+<div
+  className="Wrapper"
+>
+  <div
+    className="MobileCompany"
+  >
+    <input
+      onClick={[Function]}
+      type="button"
+      value="=МТС"
+    />
+    <input
+      onClick={[Function]}
+      type="button"
+      value="=Velcom"
+    />
+    <div
+      className="MobileCompanyName"
+    >
+      Компания «
+      Velcom
+      »
+    </div>
+    <div
+      className="MobileCompanyClients"
+    >
+      <div
+        className="MobileClient"
+      >
+        <span
+          className="MobileClientBalance"
+        >
+          200
+        </span>
+        <span
+          className="MobileClientFIO"
+        >
+          Иванов И.И.
+        </span>
+      </div>
+      <div
+        className="MobileClient"
+      >
+        <span
+          className="MobileClientBalance"
+        >
+          -250
+        </span>
+        <span
+          className="MobileClientFIO"
+        >
+          Сидоров С.С.
+        </span>
+      </div>
+      <div
+        className="MobileClient"
+      >
+        <span
+          className="MobileClientBalance"
+        >
+          -180
+        </span>
+        <span
+          className="MobileClientFIO"
+        >
+          Петров П.П.
+        </span>
+      </div>
+      <div
+        className="MobileClient"
+      >
+        <span
+          className="MobileClientBalance"
+        >
+          220
+        </span>
+        <span
+          className="MobileClientFIO"
+        >
+          Григорьев Г.Г.
+        </span>
+      </div>
+    </div>
+    <input
+      onClick={[Function]}
+      type="button"
+      value="Добавить нового клиента"
+    />
+    <br />
+    <br />
+    <input
+      onClick={[Function]}
+      type="button"
+      value="Удалить клиента"
+    />
+    <br />
+    <br />
+    <input
+      onClick={[Function]}
+      type="button"
+      value="Изменить фамилию"
+    />
+    <br />
+    <br />
+    <input
+      onClick={[Function]}
+      type="button"
+      value="Изменить баланс"
+    />
+    <br />
+    <br />
+    <input
+      onClick={[Function]}
+      type="button"
+      value="Заблокированные клиенты"
+    />
+    <br />
+    <br />
+    <input
+      onClick={[Function]}
+      type="button"
+      value="Активные клиенты"
+    />
+    <br />
+    <br />
+    <input
+      onClick={[Function]}
+      type="button"
+      value="Все клиенты"
+    />
+    <br />
+    <br />
+  </div>
+</div>
+`;
