@@ -31,7 +31,7 @@
     "webpack-dev-server": "^2.9.4",
     "merge": ">=1.2.1",
     "url-parse": ">=1.4.3",
-    "handlebars": ">=4.0.14",
+    "handlebars": ">=4.5.3",
     "js-yaml": ">=3.13.1",
     "lodash": ">=4.17.11"
   },
