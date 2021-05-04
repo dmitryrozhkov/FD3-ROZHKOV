@@ -29,7 +29,7 @@
     "react-test-renderer": "^16.4.1",
     "webpack": "^3.8.1",
     "webpack-dev-server": "^2.9.4",
-    "merge": ">=1.2.1",
+    "merge": ">=2.1.1",
     "url-parse": ">=1.4.3",
     "handlebars": ">=4.0.14",
     "js-yaml": ">=3.13.1",
