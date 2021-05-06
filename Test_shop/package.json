@@ -38,7 +38,7 @@
     "webpack": "^3.8.1",
     "webpack-config": "^7.5.0",
     "webpack-dev-server": "^2.9.4",
-    "handlebars": ">=4.0.14",
+    "handlebars": ">=4.7.7",
     "js-yaml": ">=3.13.1",
     "fstream": ">=1.0.12",
     "axios": ">=0.18.1",
