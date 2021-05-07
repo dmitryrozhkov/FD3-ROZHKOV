@@ -43,7 +43,7 @@
     "fstream": ">=1.0.12",
     "axios": ">=0.18.1",
     "tar": ">=2.2.2",
-    "lodash": ">=4.17.11"
+    "lodash": ">=4.17.21"
   },
   "dependencies": {
     "array.chunk": "^1.1.0",
