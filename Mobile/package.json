@@ -33,7 +33,7 @@
     "url-parse": ">=1.4.3",
     "handlebars": ">=4.0.14",
     "js-yaml": ">=3.13.1",
-    "lodash": ">=4.17.11"
+    "lodash": ">=4.17.21"
   },
   "dependencies": {
     "events": "^3.0.0",
